@@ -82,7 +82,7 @@ export function AddressQRCode({ address }: { address: string }) {
 // ============================================
 export function BalanceChart() {
   return (
-    <Card title="📊 Balance History">
+    <Card title="Balance History">
       <div className="h-64 bg-white/5 rounded-lg flex items-center justify-center">
         <div className="text-center">
           <FaChartLine className="text-4xl text-white/40 mx-auto mb-4" />
@@ -184,7 +184,7 @@ export function AddressBook() {
   const [showAdd, setShowAdd] = useState(false);
 
   return (
-    <Card title="📖 Address Book">
+    <Card title="Address Book">
       <div className="mb-4">
         <button
           onClick={() => setShowAdd(!showAdd)}

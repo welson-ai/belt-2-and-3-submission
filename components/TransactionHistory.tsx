@@ -90,7 +90,7 @@ export default function TransactionHistory({ publicKey }: TransactionHistoryProp
 
   if (loading) {
     return (
-      <Card title="📜 Transaction History">
+      <Card title="Transaction History">
         <div className="space-y-3">
           {[1, 2, 3].map((i) => (
             <div key={i} className="animate-pulse">
@@ -106,13 +106,13 @@ export default function TransactionHistory({ publicKey }: TransactionHistoryProp
     <Card>
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-          <FaHistory className="text-purple-400" />
+          <FaHistory className="text-stellar-gold" />
           Transaction History
         </h2>
         <button
           onClick={fetchTransactions}
           disabled={refreshing}
-          className="text-blue-400 hover:text-blue-300 disabled:opacity-50 transition-colors"
+          className="text-stellar-gold hover:text-stellar-gold-light disabled:opacity-50 transition-colors"
           title="Refresh transactions"
         >
           <FaSync className={`text-xl ${refreshing ? 'animate-spin' : ''}`} />
@@ -121,7 +121,7 @@ export default function TransactionHistory({ publicKey }: TransactionHistoryProp
 
       {transactions.length === 0 ? (
         <EmptyState
-          icon="📭"
+          icon=""
           title="No Transactions Yet"
           description="Your transaction history will appear here once you start sending or receiving XLM."
         />
@@ -133,7 +133,7 @@ export default function TransactionHistory({ publicKey }: TransactionHistoryProp
             return (
               <div
                 key={tx.id}
-                className="bg-white/5 hover:bg-white/10 rounded-xl p-4 transition-all border border-white/10 hover:border-white/20"
+                className="bg-stellar-background hover:bg-stellar-surface rounded-xl p-4 transition-all border border-stellar-blue/20 hover:border-stellar-gold/30"
               >
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-3">
@@ -141,7 +141,7 @@ export default function TransactionHistory({ publicKey }: TransactionHistoryProp
                       outgoing 
                         ? 'bg-red-500/20 text-red-400' 
                         : 'bg-green-500/20 text-green-400'
-                    }`}>
+                    } shadow-lg`}>
                       {outgoing ? <FaArrowUp /> : <FaArrowDown />}
                     </div>
                     <div>
@@ -162,7 +162,7 @@ export default function TransactionHistory({ publicKey }: TransactionHistoryProp
                     href={stellar.getExplorerLink(tx.hash, 'tx')}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-400 hover:text-blue-300 text-sm flex items-center gap-1 transition-colors"
+                    className="text-stellar-gold hover:text-stellar-gold-light text-sm flex items-center gap-1 transition-colors"
                   >
                     Details <FaExternalLinkAlt className="text-xs" />
                   </a>
@@ -179,7 +179,7 @@ export default function TransactionHistory({ publicKey }: TransactionHistoryProp
                   </div>
                 </div>
 
-                <div className="flex justify-between items-center mt-3 pt-3 border-t border-white/10">
+                <div className="flex justify-between items-center mt-3 pt-3 border-t border-stellar-blue/20">
                   <p className="text-white/40 text-xs">{formatDate(tx.createdAt)}</p>
                   <p className="text-white/30 text-xs font-mono">{tx.hash.slice(0, 12)}...</p>
                 </div>

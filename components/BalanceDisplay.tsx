@@ -58,7 +58,7 @@ export default function BalanceDisplay({ publicKey }: BalanceDisplayProps) {
 
   if (loading) {
     return (
-      <Card title="💰 Your Balance">
+      <Card title="Your Balance">
         <div className="animate-pulse">
           <div className="h-16 bg-white/5 rounded-lg mb-4"></div>
           <div className="h-10 bg-white/5 rounded-lg w-1/2"></div>
@@ -71,13 +71,13 @@ export default function BalanceDisplay({ publicKey }: BalanceDisplayProps) {
     <Card>
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-          <FaCoins className="text-yellow-400" />
+          <FaCoins className="text-stellar-gold" />
           Your Balance
         </h2>
         <button
           onClick={fetchBalance}
           disabled={refreshing}
-          className="text-blue-400 hover:text-blue-300 disabled:opacity-50 transition-colors"
+          className="text-stellar-gold hover:text-stellar-gold-light disabled:opacity-50 transition-colors"
           title="Refresh balance"
         >
           <FaSync className={`text-xl ${refreshing ? 'animate-spin' : ''}`} />
@@ -85,7 +85,7 @@ export default function BalanceDisplay({ publicKey }: BalanceDisplayProps) {
       </div>
 
       {/* XLM Balance */}
-      <div className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 border border-blue-500/30 rounded-xl p-6 mb-4">
+      <div className="bg-gradient-to-br from-stellar-blue/30 to-stellar-blue-light/30 border border-stellar-gold/30 rounded-xl p-6 mb-4 shadow-lg">
         <p className="text-white/60 text-sm mb-2">Available Balance</p>
         <div className="flex items-baseline gap-2">
           <p className="text-5xl font-bold text-white">
@@ -107,11 +107,11 @@ export default function BalanceDisplay({ publicKey }: BalanceDisplayProps) {
           {assets.map((asset, index) => (
             <div
               key={index}
-              className="bg-white/5 border border-white/10 rounded-lg p-4 flex justify-between items-center"
+              className="bg-stellar-background border border-stellar-blue/20 rounded-lg p-4 flex justify-between items-center hover:border-stellar-gold/30 transition-colors"
             >
               <div>
                 <p className="text-white font-semibold">{asset.code}</p>
-                <p className="text-white/40 text-xs font-mono truncate max-w-[200px]">
+                <p className="text-white/50 text-xs font-mono truncate max-w-[200px]">
                   {asset.issuer}
                 </p>
               </div>
@@ -124,9 +124,9 @@ export default function BalanceDisplay({ publicKey }: BalanceDisplayProps) {
       )}
 
       {/* Info Box */}
-      <div className="mt-4 p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
+      <div className="mt-4 p-3 bg-stellar-surface border border-stellar-gold/30 rounded-lg">
         <p className="text-yellow-200/90 text-xs">
-          💡 <strong>Tip:</strong> Keep at least 1 XLM in your account for network reserves.
+          <strong>Tip:</strong> Keep at least 1 XLM in your account for network reserves.
         </p>
       </div>
     </Card>

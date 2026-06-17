@@ -29,7 +29,7 @@ export function BalanceCard({
   label: string; 
 }) {
   return (
-    <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl p-6 shadow-lg">
+    <div className="bg-gradient-to-br from-stellar-blue to-stellar-blue-light rounded-xl p-6 shadow-lg border border-stellar-gold/20">
       <p className="text-white/80 text-sm mb-2">{label}</p>
       <p className="text-4xl font-bold text-white">{balance}</p>
     </div>
@@ -57,7 +57,7 @@ export function TransactionItem({
       <div className="flex justify-between items-start mb-2">
         <div>
           <p className="text-white font-semibold">
-            {type === 'payment' ? '💸' : '📝'} {type}
+            {type}
           </p>
           {amount && (
             <p className="text-white/80">
@@ -70,7 +70,7 @@ export function TransactionItem({
           href={explorerLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-400 hover:text-blue-300 text-sm"
+          className="text-stellar-gold hover:text-stellar-gold-light text-sm"
         >
           View →
         </a>
@@ -96,9 +96,9 @@ export function CopyButton({ text }: { text: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="text-blue-400 hover:text-blue-300 text-sm"
+      className="text-stellar-gold hover:text-stellar-gold-light text-sm"
     >
-      {copied ? '✓ Copied!' : '📋 Copy'}
+      {copied ? 'Copied!' : 'Copy'}
     </button>
   );
 }
@@ -116,7 +116,7 @@ export function Alert({
   const colors = {
     success: 'bg-green-500',
     error: 'bg-red-500',
-    info: 'bg-blue-500',
+    info: 'bg-stellar-blue',
   };
 
   return (
@@ -128,7 +128,7 @@ export function Alert({
         onClick={onClose}
         className="ml-4 text-white/80 hover:text-white"
       >
-        ✕
+        ×
       </button>
     </div>
   );
@@ -143,7 +143,7 @@ export function Card({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 shadow-2xl">
+    <div className="bg-stellar-surface backdrop-blur-lg rounded-2xl p-6 shadow-2xl border border-stellar-blue/20">
       {title && (
         <h2 className="text-2xl font-bold text-white mb-4">{title}</h2>
       )}
@@ -176,7 +176,7 @@ export function Input({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/40"
+        className="w-full bg-stellar-background border border-stellar-blue/30 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-stellar-gold/50 transition-colors"
       />
       {error && <p className="text-red-400 text-sm mt-1">{error}</p>}
     </div>
@@ -198,7 +198,7 @@ export function Button({
   fullWidth?: boolean;
 }) {
   const variants = {
-    primary: 'bg-blue-600 hover:bg-blue-700',
+    primary: 'bg-stellar-blue hover:bg-stellar-blue-dark',
     secondary: 'bg-gray-600 hover:bg-gray-700',
     danger: 'bg-red-600 hover:bg-red-700',
   };
@@ -209,7 +209,7 @@ export function Button({
       disabled={disabled}
       className={`${variants[variant]} ${
         fullWidth ? 'w-full' : ''
-      } text-white font-bold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
+      } text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg active:scale-95`}
     >
       {children}
     </button>
@@ -228,9 +228,9 @@ export function EmptyState({
 }) {
   return (
     <div className="text-center py-12">
-      <div className="text-6xl mb-4">{icon}</div>
+      <div className="text-6xl mb-4 opacity-70">{icon}</div>
       <h3 className="text-white text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-white/60">{description}</p>
+      <p className="text-white/60 max-w-sm mx-auto">{description}</p>
     </div>
   );
 }
@@ -258,7 +258,7 @@ export function Modal({
             onClick={onClose}
             className="text-white/60 hover:text-white text-2xl"
           >
-            ✕
+            ×
           </button>
         </div>
         <div className="p-6">{children}</div>

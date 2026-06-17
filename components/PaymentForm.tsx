@@ -120,7 +120,7 @@ export default function PaymentForm({ publicKey, onSuccess }: PaymentFormProps) 
   return (
     <Card>
       <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-        <FaPaperPlane className="text-blue-400" />
+        <FaPaperPlane className="text-stellar-gold" />
         Send Payment
       </h2>
 
@@ -135,7 +135,7 @@ export default function PaymentForm({ publicKey, onSuccess }: PaymentFormProps) 
       )}
 
       {txHash && (
-        <div className="mb-4 p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
+        <div className="mb-4 p-4 bg-green-500/10 border border-green-500/30 rounded-lg shadow-lg">
           <div className="flex items-start gap-3">
             <FaCheckCircle className="text-green-400 text-xl flex-shrink-0 mt-1" />
             <div className="flex-1">
@@ -146,7 +146,7 @@ export default function PaymentForm({ publicKey, onSuccess }: PaymentFormProps) 
                 href={stellar.getExplorerLink(txHash, 'tx')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-400 hover:text-blue-300 text-sm underline"
+                className="text-stellar-gold hover:text-stellar-gold-light text-sm underline"
               >
                 View on Stellar Expert →
               </a>
@@ -202,9 +202,9 @@ export default function PaymentForm({ publicKey, onSuccess }: PaymentFormProps) 
         </div>
       </form>
 
-      <div className="mt-4 p-3 bg-blue-500/10 border border-blue-500/30 rounded-lg">
-        <p className="text-blue-200/90 text-xs">
-          ⚠️ <strong>Double-check</strong> the recipient address before sending. Transactions on the blockchain are irreversible!
+      <div className="mt-4 p-3 bg-stellar-surface border border-stellar-gold/30 rounded-lg">
+        <p className="text-stellar-gold-light/90 text-xs">
+          <strong>Double-check</strong> the recipient address before sending. Transactions on the blockchain are irreversible!
         </p>
       </div>
     </Card>

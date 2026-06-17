@@ -36,38 +36,19 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
+    <div className="min-h-screen bg-stellar-background">
       {/* Header */}
-      <header className="border-b border-white/10 backdrop-blur-sm bg-black/20">
+      <header className="border-b border-stellar-blue/20 backdrop-blur-sm bg-stellar-surface/80">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-2xl">
-                ⭐
+              <div className="w-12 h-12 bg-gradient-to-br from-stellar-blue to-stellar-blue-light rounded-xl flex items-center justify-center text-2xl shadow-lg">
+                <span className="font-bold">S</span>
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-white">Stellar Dashboard</h1>
                 <p className="text-white/60 text-sm">Testnet Payment Interface</p>
               </div>
-            </div>
-            
-            <div className="flex items-center gap-4">
-              <a
-                href="https://stellar.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/60 hover:text-white text-sm transition-colors"
-              >
-                About Stellar
-              </a>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/60 hover:text-white text-sm transition-colors"
-              >
-                GitHub
-              </a>
             </div>
           </div>
         </div>
@@ -77,9 +58,9 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 py-8">
         {/* Welcome Banner */}
         {!isConnected && (
-          <div className="mb-8 bg-gradient-to-r from-blue-500/20 to-purple-600/20 border border-blue-500/30 rounded-2xl p-8 text-center">
+          <div className="mb-8 bg-gradient-to-r from-stellar-blue/30 to-stellar-blue-light/30 border border-stellar-gold/30 rounded-2xl p-8 text-center shadow-xl">
             <h2 className="text-3xl font-bold text-white mb-3">
-              Welcome to Stellar Payment Dashboard! 👋
+              Welcome to Stellar Payment Dashboard!
             </h2>
             <p className="text-white/70 max-w-2xl mx-auto">
               Connect your wallet to view your balance, send XLM payments, and track your transaction history.
@@ -116,24 +97,24 @@ export default function Home() {
 
             {/* Info Cards */}
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10">
-                <div className="text-3xl mb-3">⚡</div>
+              <div className="bg-stellar-surface backdrop-blur-lg rounded-xl p-6 border border-stellar-blue/20 hover:border-stellar-gold/30 transition-all duration-300">
+                <div className="text-3xl mb-3"></div>
                 <h3 className="text-white font-semibold mb-2">Lightning Fast</h3>
                 <p className="text-white/60 text-sm">
                   Transactions settle in 3-5 seconds on Stellar network
                 </p>
               </div>
 
-              <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10">
-                <div className="text-3xl mb-3">💰</div>
+              <div className="bg-stellar-surface backdrop-blur-lg rounded-xl p-6 border border-stellar-blue/20 hover:border-stellar-gold/30 transition-all duration-300">
+                <div className="text-3xl mb-3"></div>
                 <h3 className="text-white font-semibold mb-2">Low Fees</h3>
                 <p className="text-white/60 text-sm">
                   Transaction fees are just 0.00001 XLM (~$0.000001)
                 </p>
               </div>
 
-              <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10">
-                <div className="text-3xl mb-3">🔒</div>
+              <div className="bg-stellar-surface backdrop-blur-lg rounded-xl p-6 border border-stellar-blue/20 hover:border-stellar-gold/30 transition-all duration-300">
+                <div className="text-3xl mb-3"></div>
                 <h3 className="text-white font-semibold mb-2">Secure</h3>
                 <p className="text-white/60 text-sm">
                   Built on proven blockchain technology with wallet encryption
@@ -146,9 +127,9 @@ export default function Home() {
         {/* Getting Started Guide - Only show when not connected */}
         {!isConnected && (
           <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10">
-              <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4 text-2xl">
-                1️⃣
+            <div className="bg-stellar-surface backdrop-blur-lg rounded-xl p-6 border border-stellar-blue/20 hover:border-stellar-gold/30 transition-all duration-300">
+              <div className="w-10 h-10 bg-stellar-blue/30 rounded-lg flex items-center justify-center mb-4 text-2xl">
+                1
               </div>
               <h3 className="text-white font-semibold mb-2">Install a Wallet</h3>
               <p className="text-white/60 text-sm">
@@ -156,9 +137,9 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10">
-              <div className="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4 text-2xl">
-                2️⃣
+            <div className="bg-stellar-surface backdrop-blur-lg rounded-xl p-6 border border-stellar-blue/20 hover:border-stellar-gold/30 transition-all duration-300">
+              <div className="w-10 h-10 bg-stellar-blue-light/30 rounded-lg flex items-center justify-center mb-4 text-2xl">
+                2
               </div>
               <h3 className="text-white font-semibold mb-2">Connect</h3>
               <p className="text-white/60 text-sm">
@@ -166,9 +147,9 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10">
-              <div className="w-10 h-10 bg-pink-500/20 rounded-lg flex items-center justify-center mb-4 text-2xl">
-                3️⃣
+            <div className="bg-stellar-surface backdrop-blur-lg rounded-xl p-6 border border-stellar-blue/20 hover:border-stellar-gold/30 transition-all duration-300">
+              <div className="w-10 h-10 bg-stellar-gold/30 rounded-lg flex items-center justify-center mb-4 text-2xl">
+                3
               </div>
               <h3 className="text-white font-semibold mb-2">Get Testnet XLM</h3>
               <p className="text-white/60 text-sm">
@@ -176,9 +157,9 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10">
-              <div className="w-10 h-10 bg-indigo-500/20 rounded-lg flex items-center justify-center mb-4 text-2xl">
-                4️⃣
+            <div className="bg-stellar-surface backdrop-blur-lg rounded-xl p-6 border border-stellar-blue/20 hover:border-stellar-gold/30 transition-all duration-300">
+              <div className="w-10 h-10 bg-stellar-blue-dark/30 rounded-lg flex items-center justify-center mb-4 text-2xl">
+                4
               </div>
               <h3 className="text-white font-semibold mb-2">Start Sending</h3>
               <p className="text-white/60 text-sm">
@@ -194,10 +175,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="text-center text-white/40 text-sm">
             <p className="mb-2">
-              Built with ❤️ using Stellar SDK | Running on Testnet
+              Built with Stellar SDK | Running on Testnet
             </p>
             <p className="text-xs">
-              ⚠️ This is a testnet application. Do not use real funds.
+              This is a testnet application. Do not use real funds.
             </p>
           </div>
         </div>

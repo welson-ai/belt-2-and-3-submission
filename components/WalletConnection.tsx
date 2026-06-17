@@ -60,7 +60,7 @@ export default function WalletConnection({ onConnect, onDisconnect }: WalletConn
 
   if (!isConnected) {
     return (
-      <Card title="🔐 Connect Your Wallet">
+      <Card title="Connect Your Wallet">
         <p className="text-white/70 mb-6">
           Connect your Stellar wallet to view your balance and make transactions.
         </p>
@@ -68,7 +68,7 @@ export default function WalletConnection({ onConnect, onDisconnect }: WalletConn
         <button
           onClick={handleConnect}
           disabled={loading}
-          className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-xl transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-3"
+          className="w-full bg-gradient-to-r from-stellar-blue to-stellar-blue-light hover:from-stellar-blue-dark hover:to-stellar-blue text-white font-bold py-4 px-6 rounded-xl transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-3 shadow-lg"
         >
           {loading ? (
             <>
@@ -83,19 +83,19 @@ export default function WalletConnection({ onConnect, onDisconnect }: WalletConn
           )}
         </button>
 
-        <div className="mt-6 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+        <div className="mt-6 p-4 bg-stellar-surface border border-stellar-blue/30 rounded-lg">
           <p className="text-white/70 text-sm mb-3">
-            💡 <strong>Supported Wallets</strong>
+<strong>Supported Wallets</strong>
           </p>
           <div className="grid grid-cols-2 gap-2 text-xs text-white/60">
-            <div>✓ Freighter</div>
-            <div>✓ xBull</div>
-            <div>✓ Albedo</div>
-            <div>✓ Rabet</div>
-            <div>✓ Lobstr</div>
-            <div>✓ Hana</div>
-            <div>✓ WalletConnect</div>
-            <div>✓ More...</div>
+            <div>Freighter</div>
+            <div>xBull</div>
+            <div>Albedo</div>
+            <div>Rabet</div>
+            <div>Lobstr</div>
+            <div>Hana</div>
+            <div>WalletConnect</div>
+            <div>More...</div>
           </div>
           <p className="text-white/50 text-xs mt-3">
             Click "Connect Wallet" to choose your preferred wallet
@@ -120,15 +120,15 @@ export default function WalletConnection({ onConnect, onDisconnect }: WalletConn
         </button>
       </div>
 
-      <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-        <p className="text-white/60 text-xs mb-2">Your Address</p>
+      <div className="bg-stellar-background rounded-xl p-4 border border-stellar-blue/20">
+        <p className="text-white/70 text-xs mb-2 font-medium">Your Address</p>
         <div className="flex items-center justify-between gap-3">
           <p className="text-white font-mono text-sm break-all">
             {publicKey}
           </p>
           <button
             onClick={handleCopyAddress}
-            className="text-blue-400 hover:text-blue-300 text-xl flex-shrink-0 transition-colors"
+            className="text-stellar-gold hover:text-stellar-gold-light text-xl flex-shrink-0 transition-colors"
             title={copied ? 'Copied!' : 'Copy address'}
           >
             {copied ? <FaCheck className="text-green-400" /> : <FaCopy />}
@@ -141,7 +141,7 @@ export default function WalletConnection({ onConnect, onDisconnect }: WalletConn
           href={stellar.getExplorerLink(publicKey, 'account')}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-400 hover:text-blue-300 text-sm underline"
+          className="text-stellar-gold hover:text-stellar-gold-light text-sm underline"
         >
           View on Stellar Expert →
         </a>
