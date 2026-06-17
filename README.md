@@ -1,332 +1,328 @@
-# 🌟 Stellar Frontend Starter Template
+# Stellar Payment Dashboard
 
-> **Build beautiful payment dashboards on Stellar blockchain - Focus only on UI/UX!**
+A modern, responsive payment dashboard built on the Stellar blockchain using Next.js, TypeScript, and Tailwind CSS with Stellar's official brand colors.
 
-All blockchain logic is already implemented with [Stellar Wallets Kit](https://github.com/Creit-Tech/Stellar-Wallets-Kit). Your job is to create an amazing user experience.
+## Project Overview
 
-[![Stellar](https://img.shields.io/badge/Stellar-Testnet-blue)](https://stellar.org)
-[![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8)](https://tailwindcss.com)
+This project is a Stellar payment dashboard that allows users to connect their wallet, view their balance, send XLM payments, and track transaction history. The application runs on Stellar's testnet and features a modern dark-themed UI with Stellar's official brand colors.
 
-## 🎯 What's This?
+## Tech Stack
 
-This is a **starter template** for building Stellar payment dashboards. Perfect for:
-- 🎓 Learning Stellar blockchain development
-- 🚀 Building your first blockchain app
-- 💼 Creating payment interfaces quickly
-- 🏆 Participating in hackathons
+- **Framework**: Next.js 14.2.0 (React 18.3.1)
+- **Language**: TypeScript 5.4.5
+- **Styling**: Tailwind CSS 3.4.4
+- **Blockchain**: Stellar SDK 12.3.0
+- **Wallet Integration**: Stellar Wallets Kit 1.9.5
+- **Icons**: React Icons 5.0.1
 
-**No blockchain knowledge required!** All the complex blockchain logic is abstracted away in `lib/stellar-helper.ts` (DO NOT MODIFY). You only need to focus on creating beautiful UI/UX.
-
----
-
-## ✨ Features
-
-### ✅ Already Implemented (Ready to Use!)
-
-- **Wallet Connection** - Connect with multiple Stellar wallets (Freighter, xBull, Albedo, etc.)
-- **Balance Display** - View XLM balance with auto-refresh
-- **Send Payments** - Send XLM with form validation
-- **Transaction History** - View recent transactions with links to explorer
-- **Responsive Design** - Mobile-friendly base components
-- **Loading States** - Skeletons and spinners
-- **Error Handling** - User-friendly error messages
-- **TypeScript** - Full type safety
-
-### 🎨 Bonus Features (Add These for Extra Credit!)
-
-All components are in `components/BonusFeatures.tsx` with TODO comments:
-
-- [ ] **Dark/Light Mode** (10 points) - Theme toggle
-- [ ] **Copy Address** (5 points) - Already in WalletConnection!
-- [ ] **QR Code** (10 points) - Generate QR for addresses
-- [ ] **Balance Chart** (15 points) - Visualize balance history
-- [ ] **Search Transactions** (10 points) - Filter transaction history
-- [ ] **Multiple Assets** (15 points) - Support for other Stellar assets
-- [ ] **Animations** (10 points) - Smooth transitions
-- [ ] **Mobile Responsive** (10 points) - Perfect mobile experience
-- [ ] **Transaction Confirmations** (10 points) - Confirm before sending
-- [ ] **Address Book** (15 points) - Save frequent addresses
-
----
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- **Node.js 18+** - [Download](https://nodejs.org/)
-- **A Stellar Wallet** - Install one of these:
-  - [Freighter](https://freighter.app) (Recommended)
-  - [xBull](https://xbull.app)
-  - [Lobstr](https://lobstr.co)
-  - Or any other [supported wallet](https://github.com/Creit-Tech/Stellar-Wallets-Kit#compatible-wallets)
-
-### Installation
-
-```bash
-# Clone the repository
-git clone <your-repo-url>
-cd stellar-frontend-challenge
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-### Get Testnet XLM
-
-1. Connect your wallet
-2. Copy your address
-3. Visit [Stellar Laboratory](https://laboratory.stellar.org/#account-creator?network=test)
-4. Paste your address and click "Fund"
-5. Refresh your balance!
-
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 stellar-frontend-challenge/
-├── app/
-│   ├── globals.css          # Global styles
-│   ├── layout.tsx           # Root layout
-│   └── page.tsx             # Main dashboard page
-├── components/
-│   ├── WalletConnection.tsx    # Wallet connect/disconnect
-│   ├── BalanceDisplay.tsx      # Show XLM balance
-│   ├── PaymentForm.tsx         # Send payment form
-│   ├── TransactionHistory.tsx  # Transaction list
-│   ├── BonusFeatures.tsx       # Bonus feature templates
-│   └── example-components.tsx  # Reusable UI components
-├── lib/
-│   └── stellar-helper.ts    # ⚠️ DO NOT MODIFY - Blockchain logic
-└── package.json
+├── app/                          # Next.js app directory
+│   ├── globals.css             # Global styles and Tailwind directives
+│   ├── layout.tsx              # Root layout component
+│   └── page.tsx                # Main page component
+├── components/                  # React components
+│   ├── BalanceDisplay.tsx      # Balance display with refresh functionality
+│   ├── BonusFeatures.tsx       # Placeholder components for bonus features
+│   ├── PaymentForm.tsx         # Payment form with validation
+│   ├── TransactionHistory.tsx   # Transaction history component
+│   ├── WalletConnection.tsx    # Wallet connection/disconnection
+│   └── example-components.tsx  # Reusable UI components (Card, Input, Button, etc.)
+├── lib/                        # Utility libraries
+│   └── stellar-helper.ts       # Stellar blockchain logic (DO NOT MODIFY)
+├── contract/                   # Soroban smart contract (in progress)
+│   ├── Cargo.toml             # Rust package configuration
+│   └── src/
+│       └── lib.rs              # Soroban contract code
+├── tailwind.config.js          # Tailwind CSS configuration with Stellar colors
+├── tsconfig.json               # TypeScript configuration
+├── next.config.js              # Next.js configuration
+├── package.json                # Project dependencies and scripts
+└── postcss.config.js           # PostCSS configuration
 ```
 
----
+## Architecture
 
-## 🎨 Customization Guide
+### Component Architecture
 
-### 1. Modify Existing Components
+The application follows a hierarchical component structure with clear separation of concerns:
 
-All components are in `components/` folder. They're well-commented and easy to customize:
-
-```tsx
-// Example: Change payment form layout in PaymentForm.tsx
-<div className="space-y-4">
-  <Input label="Recipient" ... />
-  <Input label="Amount" ... />
-  // Add your custom fields here!
-</div>
+```
+app/page.tsx (Main Container)
+├── WalletConnection
+│   ├── Connect/Disconnect Logic
+│   ├── Address Display
+│   └── Copy to Clipboard
+├── BalanceDisplay
+│   ├── XLM Balance
+│   ├── Other Assets
+│   └── Refresh Functionality
+├── PaymentForm
+│   ├── Form Validation
+│   ├── Payment Submission
+│   └── Transaction Confirmation
+└── TransactionHistory
+    ├── Transaction List
+    ├── Transaction Details
+    └── Refresh Functionality
 ```
 
-### 2. Change Colors & Theme
+### Data Flow
 
-Edit `app/globals.css` or Tailwind classes:
+1. **Wallet Connection Flow**:
+   - User clicks "Connect Wallet" → `WalletConnection` component
+   - Opens wallet modal via `StellarWalletsKit`
+   - Returns public key → Updates parent state
+   - Triggers balance and transaction fetch
 
-```tsx
-// Change gradient colors in page.tsx
-<div className="bg-gradient-to-br from-blue-500 to-purple-600">
-  // Change these colors to match your brand!
-</div>
+2. **Payment Flow**:
+   - User fills form → `PaymentForm` validates input
+   - Calls `stellar.sendPayment()` → `stellar-helper.ts`
+   - Signs transaction via wallet
+   - Submits to Stellar network
+   - Returns transaction hash → Updates UI
+
+3. **Balance/Transaction Flow**:
+   - Component mounts → Calls `stellar.getBalance()` or `stellar.getRecentTransactions()`
+   - Fetches from Stellar Horizon API
+   - Updates component state
+   - Displays formatted data
+
+### Blockchain Integration Layer
+
+The `lib/stellar-helper.ts` file contains all blockchain logic and should NOT be modified:
+
+- **StellarHelper Class**: Main blockchain interaction class
+- **Wallet Connection**: Uses Stellar Wallets Kit for wallet integration
+- **Balance Retrieval**: Fetches XLM and custom asset balances
+- **Payment Processing**: Handles transaction creation, signing, and submission
+- **Transaction History**: Retrieves recent transactions from Horizon API
+- **Explorer Integration**: Generates links to Stellar Expert
+
+### Styling Architecture
+
+The project uses a custom Stellar color palette defined in `tailwind.config.js`:
+
+```javascript
+stellar: {
+  black: '#1d1d1f',           // Primary brand color
+  gold: '#b07c3b',            // Accent color
+  'gold-light': '#deb15e',    // Lighter accent
+  blue: '#283c62',            // Primary blue
+  'blue-light': '#3d5180',    // Lighter blue
+  'blue-dark': '#1a2a45',     // Darker blue
+  background: '#0f1419',      // Background color
+  surface: '#1a1f26',         // Surface elements
+}
 ```
 
-### 3. Add Bonus Features
+## Components
 
-Check `components/BonusFeatures.tsx` for ready-to-use templates:
+### Core Components
 
-```tsx
-import { ThemeToggle, AddressQRCode } from '@/components/BonusFeatures';
+#### WalletConnection
+- Handles wallet connection/disconnection
+- Displays connected address with copy functionality
+- Shows supported wallets list
+- Provides link to Stellar Expert
 
-// Use in your page
-<ThemeToggle />
-<AddressQRCode address={publicKey} />
-```
+#### BalanceDisplay
+- Shows XLM balance with formatting
+- Displays other assets (if present)
+- Includes USD estimate (placeholder)
+- Refresh functionality with loading states
 
-### 4. Use Example Components
+#### PaymentForm
+- Input fields for recipient address, amount, and optional memo
+- Form validation for Stellar addresses and amounts
+- Success/error handling with user-friendly messages
+- Transaction confirmation display with explorer link
 
-Ready-made components in `example-components.tsx`:
+#### TransactionHistory
+- Lists recent transactions (limit: 10)
+- Shows transaction type, amount, from/to addresses
+- Relative time formatting (e.g., "2m ago", "1h ago")
+- Links to Stellar Expert for transaction details
+- Empty state when no transactions exist
 
-```tsx
-import { Card, Button, Input, Alert } from './example-components';
+### Reusable Components (example-components.tsx)
 
-<Card title="My Feature">
-  <Input label="Name" ... />
-  <Button onClick={...}>Submit</Button>
-</Card>
-```
+- **Card**: Container component with consistent styling
+- **Input**: Form input with label and error handling
+- **Button**: Button with multiple variants (primary, secondary, danger)
+- **Alert**: Success/error/info alert messages
+- **EmptyState**: Placeholder for empty states
+- **Modal**: Modal component for overlays
+- **CopyButton**: Copy to clipboard functionality
+- **LoadingSpinner**: Loading animation
 
----
+### Bonus Features (BonusFeatures.tsx)
 
-## 🛠️ Using the Stellar Helper
+Placeholder components for potential enhancements:
+- **ThemeToggle**: Dark/light mode switching
+- **AddressQRCode**: QR code generation for addresses
+- **BalanceChart**: Balance history visualization
+- **TransactionFilter**: Search/filter transactions
+- **TransactionConfirmation**: Payment confirmation modal
+- **AddressBook**: Save and manage contact addresses
+- **AnimatedCard**: Animation utilities
 
-All blockchain operations are in `lib/stellar-helper.ts`. **DO NOT MODIFY THIS FILE!**
+## Features
 
-### Available Methods:
+### Current Features
+- ✅ Wallet connection with multiple wallet support
+- ✅ Balance display with refresh functionality
+- ✅ XLM payment sending with memo support
+- ✅ Transaction history with explorer links
+- ✅ Form validation and error handling
+- ✅ Responsive design
+- ✅ Stellar brand color scheme
+- ✅ Loading states and animations
+- ✅ Copy to clipboard functionality
 
-```typescript
-import { stellar } from '@/lib/stellar-helper';
+### Bonus Features (To Implement)
+- ⏳ Dark/light mode toggle
+- ⏳ QR code for wallet address
+- ⏳ Balance chart/graph
+- ⏳ Transaction search/filter
+- ⏳ Transaction confirmation modal
+- ⏳ Address book
+- ⏳ Enhanced animations
 
-// Connect wallet (opens Stellar Wallets Kit modal)
-const address = await stellar.connectWallet();
+## Setup Instructions
 
-// Get balance
-const { xlm, assets } = await stellar.getBalance(address);
+### Prerequisites
+- Node.js 18+ installed
+- npm or yarn package manager
+- Stellar wallet (Freighter, xBull, Lobstr, etc.)
 
-// Send payment
-const result = await stellar.sendPayment({
-  from: senderAddress,
-  to: recipientAddress,
-  amount: "10.5",
-  memo: "Payment for services"
-});
+### Installation
 
-// Get transaction history
-const transactions = await stellar.getRecentTransactions(address, 10);
-
-// Get explorer link
-const link = stellar.getExplorerLink(txHash, 'tx');
-
-// Format address (shorten)
-const short = stellar.formatAddress(address, 4, 4); // "GABC...XYZ"
-
-// Disconnect
-stellar.disconnect();
-```
-
----
-
-## 🎓 Learning Resources
-
-### Stellar Blockchain
-- [Stellar Docs](https://developers.stellar.org/)
-- [Stellar Laboratory](https://laboratory.stellar.org/)
-- [Stellar Expert](https://stellar.expert/explorer/testnet) (Blockchain Explorer)
-
-### Stellar Wallets Kit
-- [GitHub Repository](https://github.com/Creit-Tech/Stellar-Wallets-Kit)
-- [Documentation](https://stellarwalletskit.dev/)
-
-### Frontend Technologies
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Tailwind CSS](https://tailwindcss.com/docs)
-- [React Icons](https://react-icons.github.io/react-icons/)
-
----
-
-## 📊 Evaluation Criteria (If Using as Challenge)
-
-### UI/UX Design (40%)
-- Visual appeal and modern design
-- User-friendly interface
-- Consistent styling
-- Good use of colors and typography
-- Responsive layout
-
-### Code Quality (30%)
-- Clean, organized code
-- Proper component structure
-- TypeScript usage
-- Comments where needed
-- No console errors
-
-### Functionality (30%)
-- All required features work
-- Proper error handling
-- Loading states
-- Edge cases handled
-
----
-
-## 🚫 Important Rules
-
-1. **DO NOT** modify `lib/stellar-helper.ts`
-2. **DO NOT** write any blockchain/transaction logic yourself
-3. **DO** focus on making the UI/UX amazing
-4. **DO** use any CSS framework you like (Tailwind is pre-installed)
-5. **DO** add extra features for bonus points
-6. **DO** make it your own - be creative!
-
----
-
-## 📦 Tech Stack
-
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| Next.js | 14.2.0 | React Framework |
-| TypeScript | 5.4.5 | Type Safety |
-| Tailwind CSS | 3.4.4 | Styling |
-| Stellar SDK | 12.3.0 | Blockchain |
-| Stellar Wallets Kit | 1.9.5 | Multi-Wallet Support |
-| React Icons | 5.0.1 | Icon Library |
-
----
-
-## 🤝 Contributing
-
-This is a starter template! Feel free to:
-- Fork and customize
-- Share your creations
-- Submit improvements via PR
-- Report issues
-
----
-
-## 📝 License
-
-MIT License - Feel free to use this for learning, hackathons, or commercial projects!
-
----
-
-## 💡 Tips for Success
-
-1. **Start Simple** - Get basic features working first
-2. **Test Often** - Use testnet XLM freely
-3. **Read Comments** - All components have helpful comments
-4. **Check Examples** - Look at `example-components.tsx` for inspiration
-5. **Have Fun!** - Building on blockchain is exciting! 🚀
-
----
-
-## 🆘 Troubleshooting
-
-### Wallet won't connect?
-- Make sure you have a Stellar wallet installed
-- Check if you're on Testnet (not Mainnet)
-- Try refreshing the page
-
-### Balance shows 0?
-- Fund your testnet account at [Stellar Laboratory](https://laboratory.stellar.org/#account-creator?network=test)
-- Click the refresh button in BalanceDisplay
-
-### Transaction fails?
-- Check if you have enough XLM (keep at least 1 XLM as reserve)
-- Verify the recipient address is valid
-- Make sure you're on Testnet
-
-### Build errors?
+1. Clone the repository:
 ```bash
-# Clear cache and reinstall
-rm -rf node_modules package-lock.json
+git clone <repository-url>
+cd stellar-frontend-challenge
+```
+
+2. Install dependencies:
+```bash
 npm install
 ```
 
+3. Run the development server:
+```bash
+npm run dev
+```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+### Build for Production
+
+```bash
+npm run build
+npm start
+```
+
+## Usage
+
+### Connecting a Wallet
+
+1. Click the "Connect Wallet" button
+2. Select your preferred wallet from the modal
+3. Approve the connection request in your wallet
+4. Your balance and transaction history will load automatically
+
+### Sending XLM Payments
+
+1. Ensure your wallet is connected
+2. Enter the recipient's Stellar address (starts with 'G', 56 characters)
+3. Enter the amount in XLM (minimum: 0.0000001 XLM)
+4. Optionally add a memo
+5. Click "Send Payment"
+6. Confirm the transaction in your wallet
+7. View the transaction hash and link to Stellar Expert
+
+### Getting Testnet XLM
+
+To fund your testnet account:
+1. Connect your wallet
+2. Copy your public key
+3. Visit [Stellar Friendbot](https://friendbot.stellar.org/)
+4. Paste your public key
+5. Receive 10,000 testnet XLM
+
+## Network Configuration
+
+The application is configured to run on Stellar's **testnet** by default. To switch to mainnet, modify the network parameter in `lib/stellar-helper.ts`:
+
+```typescript
+const stellar = new StellarHelper('mainnet'); // Change from 'testnet'
+```
+
+**⚠️ Warning**: Never use mainnet for testing. Only use testnet for development.
+
+## Stellar Brand Colors
+
+The application uses Stellar's official brand colors:
+
+- **Stellar Black**: #1d1d1f (primary brand color)
+- **Stellar Gold**: #b07c3b (accent color)
+- **Stellar Gold Light**: #deb15e (lighter accent)
+- **Stellar Blue**: #283c62 (primary blue)
+- **Stellar Blue Light**: #3d5180 (lighter blue)
+- **Stellar Blue Dark**: #1a2a45 (darker blue)
+- **Stellar Background**: #0f1419 (background)
+- **Stellar Surface**: #1a1f26 (surface elements)
+
+## Important Notes
+
+### DO NOT MODIFY
+- `lib/stellar-helper.ts` - Contains all blockchain logic
+- Any files marked with "DO NOT MODIFY" comments
+
+### Safe to Modify
+- All components in `components/` directory
+- `app/page.tsx` - Main page layout and UI
+- `tailwind.config.js` - Styling configuration
+- `app/globals.css` - Global styles
+
+## Development Scripts
+
+```bash
+npm run dev      # Start development server
+npm run build    # Build for production
+npm start        # Start production server
+npm run lint     # Run ESLint
+```
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## License
+
+This project is part of the Stellar Frontend Challenge.
+
+## Resources
+
+- [Stellar Documentation](https://developers.stellar.org/)
+- [Stellar SDK](https://github.com/stellar/js-stellar-sdk)
+- [Stellar Wallets Kit](https://github.com/creit-tech/stellar-wallets-kit)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+
+## Support
+
+For issues or questions related to:
+- **UI/UX**: Modify components in the `components/` directory
+- **Blockchain Logic**: Contact challenge organizers (do not modify `stellar-helper.ts`)
+- **Stellar Network**: Check [Stellar Status](https://status.stellar.org/)
+
 ---
 
-## 🌟 Show Your Work!
-
-Built something cool with this template? Share it!
-- Tweet with #StellarDevelopers
-- Share in [Stellar Discord](https://discord.gg/stellardev)
-- Submit to [Stellar Community](https://stellar.org/community)
-
----
-
-**Made with ❤️ for the Stellar Community**
-
-Happy Building! 🚀✨
+**Built with Stellar SDK | Running on Testnet**
