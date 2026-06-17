@@ -57,6 +57,7 @@ export default function TransactionHistory({ publicKey }: TransactionHistoryProp
     if (publicKey) {
       fetchTransactions();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [publicKey]);
 
   const formatDate = (dateString: string): string => {

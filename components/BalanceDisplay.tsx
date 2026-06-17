@@ -46,6 +46,7 @@ export default function BalanceDisplay({ publicKey }: BalanceDisplayProps) {
     if (publicKey) {
       fetchBalance();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [publicKey]);
 
   const formatBalance = (balance: string): string => {

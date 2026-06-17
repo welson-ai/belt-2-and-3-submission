@@ -64,7 +64,7 @@ export default function Home() {
             </h2>
             <p className="text-white/70 max-w-2xl mx-auto">
               Connect your wallet to view your balance, send XLM payments, and track your transaction history.
-              All on Stellar's lightning-fast blockchain.
+              All on Stellar&apos;s lightning-fast blockchain.
             </p>
           </div>
         )}

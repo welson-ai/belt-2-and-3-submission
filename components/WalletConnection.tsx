@@ -98,7 +98,7 @@ export default function WalletConnection({ onConnect, onDisconnect }: WalletConn
             <div>More...</div>
           </div>
           <p className="text-white/50 text-xs mt-3">
-            Click "Connect Wallet" to choose your preferred wallet
+            Click &quot;Connect Wallet&quot; to choose your preferred wallet
           </p>
         </div>
       </Card>
