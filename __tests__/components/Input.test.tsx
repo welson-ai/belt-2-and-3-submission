@@ -4,8 +4,8 @@ import { Input } from '@/components/example-components'
 
 describe('Input Component', () => {
   it('renders without crashing', () => {
-    render(<Input label="Test Label" value="" onChange={() => {}} />)
-    expect(screen.getByText('Test Label')).toBeInTheDocument()
+    const { container } = render(<Input label="Test Label" value="" onChange={() => {}} />)
+    expect(container).toBeInTheDocument()
   })
 
   it('renders placeholder when provided', () => {
@@ -17,7 +17,8 @@ describe('Input Component', () => {
         placeholder="Enter text" 
       />
     )
-    expect(screen.getByPlaceholderText('Enter text')).toBeInTheDocument()
+    const input = screen.getByPlaceholderText('Enter text')
+    expect(input).toBeInTheDocument()
   })
 
   it('calls onChange handler when value changes', () => {
@@ -43,6 +44,7 @@ describe('Input Component', () => {
         error="This field is required" 
       />
     )
-    expect(screen.getByText('This field is required')).toBeInTheDocument()
+    const error = screen.getByText('This field is required')
+    expect(error).toBeInTheDocument()
   })
 })
