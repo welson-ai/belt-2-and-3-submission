@@ -172,24 +172,24 @@ Placeholder components for potential enhancements:
 ## Features
 
 ### Current Features
-- ✅ Wallet connection with multiple wallet support
-- ✅ Balance display with refresh functionality
-- ✅ XLM payment sending with memo support
-- ✅ Transaction history with explorer links
-- ✅ Form validation and error handling
-- ✅ Responsive design
-- ✅ Stellar brand color scheme
-- ✅ Loading states and animations
-- ✅ Copy to clipboard functionality
+- Wallet connection with multiple wallet support
+- Balance display with refresh functionality
+- XLM payment sending with memo support
+- Transaction history with explorer links
+- Form validation and error handling
+- Responsive design
+- Stellar brand color scheme
+- Loading states and animations
+- Copy to clipboard functionality
 
 ### Bonus Features (To Implement)
-- ⏳ Dark/light mode toggle
-- ⏳ QR code for wallet address
-- ⏳ Balance chart/graph
-- ⏳ Transaction search/filter
-- ⏳ Transaction confirmation modal
-- ⏳ Address book
-- ⏳ Enhanced animations
+- Dark/light mode toggle
+- QR code for wallet address
+- Balance chart/graph
+- Transaction search/filter
+- Transaction confirmation modal
+- Address book
+- Enhanced animations
 
 ## Setup Instructions
 
@@ -261,7 +261,7 @@ The application is configured to run on Stellar's **testnet** by default. To swi
 const stellar = new StellarHelper('mainnet'); // Change from 'testnet'
 ```
 
-**⚠️ Warning**: Never use mainnet for testing. Only use testnet for development.
+**Warning**: Never use mainnet for testing. Only use testnet for development.
 
 ## Stellar Brand Colors
 
