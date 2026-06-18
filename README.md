@@ -3,44 +3,21 @@
 ## Submission Requirements - Belt 2 and Belt 3
 
 #### Screenshot: wallet options available
-![Wallet Setup](public/screenshot1)
+![Wallet Setup](public/screenshot1.png)
 
 #### Mobile responsive UI
 
-![Funding Testnets](public/screenshot2)
+![Funding Testnets](public/screenshot2.png)
 
 #### CI/CD pipeline running
 
-![Funding Testnets](public/screenshot3)
+![Funding Testnets](public/screenshot3.png)
 
 #### Test output with 3+ passing tests
 
-![Funding Testnets](public/screenshot4)
+![Funding Testnets](public/screenshot4.png)
 
-### Belt 2 Requirements
-- ✅ UI/UX Redesign with Stellar brand colors
-- ✅ Removal of emojis from all components
-- ✅ Removal of "About Stellar" and "GitHub" links from header
-- ✅ Comprehensive README with project structure and architecture
-- ✅ Git commits staged and pushed to GitHub repository
 
-### Belt 3 Requirements
-- ✅ CI/CD Pipeline implementation with GitHub Actions
-- ✅ Testing framework setup (Jest with React Testing Library)
-- ✅ 11 passing unit tests across 3 test suites
-- ✅ Automated linting, type-checking, and build validation
-- ✅ Security scanning with npm audit
-- ✅ Project structure validation
-- ✅ All pipeline jobs passing successfully
-
-### Repository
-- **GitHub Repository**: https://github.com/welson-ai/belt-2-and-3-submission
-- **Branch**: main
-- **CI/CD Status**: All jobs passing (test, lint, type-check, build, security-scan, validate)
-
----
-
-A modern, responsive payment dashboard built on the Stellar blockchain using Next.js, TypeScript, and Tailwind CSS with Stellar's official brand colors.
 
 ## Project Overview
 
