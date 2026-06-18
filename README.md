@@ -2,6 +2,21 @@
 
 ## Submission Requirements - Belt 2 and Belt 3
 
+#### Screenshot: wallet options available
+![Wallet Setup](public/screenshot1)
+
+#### Mobile responsive UI
+
+![Funding Testnets](public/screenshot2)
+
+#### CI/CD pipeline running
+
+![Funding Testnets](public/screenshot3)
+
+#### Test output with 3+ passing tests
+
+![Funding Testnets](public/screenshot4)
+
 ### Belt 2 Requirements
 - ✅ UI/UX Redesign with Stellar brand colors
 - ✅ Removal of emojis from all components
