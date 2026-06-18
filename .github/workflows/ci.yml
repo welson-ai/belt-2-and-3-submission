@@ -24,6 +24,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: List installed packages
+        run: npm list
+
       - name: Cache Jest cache
         uses: actions/cache@v4
         with:
@@ -31,7 +34,7 @@ jobs:
           key: ${{ runner.os }}-jest-${{ hashFiles('**/package-lock.json') }}
 
       - name: Run tests
-        run: npm test -- --passWithNoTests --coverage --verbose || exit 0
+        run: npm test -- --passWithNoTests --coverage --verbose
 
       - name: Upload coverage reports
         uses: actions/upload-artifact@v4
@@ -64,7 +67,7 @@ jobs:
         run: npm ci
 
       - name: Run linter
-        run: npm run lint || exit 0
+        run: npm run lint
 
       - name: Check for lint errors
         run: |
@@ -87,7 +90,7 @@ jobs:
         run: npm ci
 
       - name: Type check
-        run: npx tsc --noEmit || exit 0
+        run: npx tsc --noEmit
 
       - name: Check TypeScript compilation
         run: echo "TypeScript compilation check completed"
