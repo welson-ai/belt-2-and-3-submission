@@ -39,6 +39,7 @@ This project is a Stellar payment dashboard that allows users to connect their w
 - **Blockchain**: Stellar SDK 12.3.0
 - **Wallet Integration**: Stellar Wallets Kit 1.9.5
 - **Icons**: React Icons 5.0.1
+- **Smart Contract**: Soroban SDK (soroban-client, @stellar/freighter-api)
 
 ## Project Structure
 
@@ -56,8 +57,9 @@ stellar-frontend-challenge/
 │   ├── WalletConnection.tsx    # Wallet connection/disconnection
 │   └── example-components.tsx  # Reusable UI components (Card, Input, Button, etc.)
 ├── lib/                        # Utility libraries
-│   └── stellar-helper.ts       # Stellar blockchain logic (DO NOT MODIFY)
-├── contract/                   # Soroban smart contract (in progress)
+│   ├── stellar-helper.ts       # Stellar blockchain logic (DO NOT MODIFY)
+│   └── contract.ts            # Soroban smart contract service
+├── smart-contract/             # Soroban smart contract
 │   ├── Cargo.toml             # Rust package configuration
 │   └── src/
 │       └── lib.rs              # Soroban contract code
@@ -125,6 +127,53 @@ The `lib/stellar-helper.ts` file contains all blockchain logic and should NOT be
 - **Payment Processing**: Handles transaction creation, signing, and submission
 - **Transaction History**: Retrieves recent transactions from Horizon API
 - **Explorer Integration**: Generates links to Stellar Expert
+
+### Smart Contract Integration
+
+The frontend is integrated with a deployed Soroban smart contract on Stellar testnet:
+
+**Contract Details:**
+- **Contract ID**: CCCVBY3SCHOWYSGNCBFIT46CTBX2A6OD6U5344JGMZO47ZRJRVN4MBM4
+- **Network**: Stellar Testnet
+- **RPC URL**: https://soroban-testnet.stellar.org
+
+**Integration Architecture:**
+
+1. **Contract Service (`lib/contract.ts`)**:
+   - Uses Stellar SDK for Soroban contract interaction
+   - Provides methods to call all contract functions
+   - Handles transaction building and signing preparation
+   - Uses Freighter wallet for transaction signing
+
+2. **Contract Functions Available:**
+   - `initialize(admin: Address)` - Initialize contract with admin
+   - `get_admin()` - Get the contract admin address
+   - `record_payment(from, to, amount, asset)` - Record payment transaction
+   - `get_transaction(sequence)` - Get transaction by sequence number
+   - `get_transaction_count()` - Get total transaction count
+   - `get_info()` - Get contract info (admin and count)
+   - `update_admin(new_admin)` - Update contract admin
+
+3. **UI Integration (`components/ContractStats.tsx`)**:
+   - Displays contract transaction count
+   - Shows contract admin address
+   - Provides refresh functionality
+   - Integrated into main dashboard when wallet is connected
+
+4. **Connection Flow:**
+   - User connects wallet via Stellar Wallets Kit
+   - Contract service uses Stellar SDK to build transactions
+   - Transactions are signed by Freighter wallet
+   - Signed transactions are submitted to Stellar network
+   - Contract state is read via RPC calls
+
+5. **Dependencies:**
+   - `@stellar/stellar-sdk` - Core Stellar SDK for blockchain interaction
+   - `soroban-client` - Soroban contract interaction (deprecated, using Stellar SDK instead)
+   - `@stellar/freighter-api` - Freighter wallet integration
+
+**Transaction Hash for Contract Interaction:**
+4dc65ecf9334d86c0127be3e9c512b0143b837d02877f0db99ad735a3e358200
 
 ### Styling Architecture
 

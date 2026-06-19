@@ -1,0 +1,5 @@
+/Users/h/CascadeProjects/stellar-frontend-challenge/contract/target/release/build/stellar-xdr-62b86b9df6c5a25c/build_script_build-62b86b9df6c5a25c.d: /Users/h/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/stellar-xdr-21.2.0/build.rs
+
+/Users/h/CascadeProjects/stellar-frontend-challenge/contract/target/release/build/stellar-xdr-62b86b9df6c5a25c/build_script_build-62b86b9df6c5a25c: /Users/h/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/stellar-xdr-21.2.0/build.rs
+
+/Users/h/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/stellar-xdr-21.2.0/build.rs:
