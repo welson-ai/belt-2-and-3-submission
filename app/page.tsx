@@ -14,6 +14,7 @@ import WalletConnection from '@/components/WalletConnection';
 import BalanceDisplay from '@/components/BalanceDisplay';
 import PaymentForm from '@/components/PaymentForm';
 import TransactionHistory from '@/components/TransactionHistory';
+import ContractStats from '@/components/ContractStats';
 
 export default function Home() {
   const [publicKey, setPublicKey] = useState<string>('');
@@ -77,6 +78,9 @@ export default function Home() {
         {/* Dashboard Content - Only show when connected */}
         {isConnected && publicKey && (
           <div className="space-y-8">
+            {/* Contract Stats */}
+            <ContractStats />
+
             {/* Balance Section */}
             <div key={`balance-${refreshKey}`}>
               <BalanceDisplay publicKey={publicKey} />
