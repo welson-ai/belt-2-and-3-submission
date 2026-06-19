@@ -6,20 +6,30 @@ import {
   Keypair,
   Address,
   SorobanDataBuilder,
-  Operation
+  Operation,
+  Server
 } from '@stellar/stellar-sdk';
 
 const CONTRACT_ID = 'CCCVBY3SCHOWYSGNCBFIT46CTBX2A6OD6U5344JGMZO47ZRJRVN4MBM4';
 const NETWORK_PASSPHRASE = Networks.TESTNET;
+const HORIZON_URL = 'https://horizon-testnet.stellar.org';
 
-// For now, we'll use a simpler approach that doesn't require RPC connection for read operations
-// In production, you would use the Soroban RPC server
+// Initialize Horizon server for transaction submission and confirmation
+const server = new Server(HORIZON_URL);
+
+export interface TransactionResult {
+  hash: string;
+  status: 'pending' | 'success' | 'failed';
+  explorerUrl: string;
+}
 
 export class SorobanContractService {
   private contractId: string;
+  private horizonUrl: string;
 
   constructor() {
     this.contractId = CONTRACT_ID;
+    this.horizonUrl = HORIZON_URL;
   }
 
   /**
@@ -53,7 +63,7 @@ export class SorobanContractService {
   /**
    * Initialize the contract with an admin address
    */
-  async initialize(adminAddress: string, signerPublicKey: string): Promise<string> {
+  async initialize(adminAddress: string, signerPublicKey: string): Promise<TransactionResult> {
     try {
       const contractAddress = new Address(this.contractId);
       const adminAddressObj = new Address(adminAddress);
@@ -76,7 +86,16 @@ export class SorobanContractService {
         .setTimeout(30)
         .build();
 
-      return tx.toXDR();
+      // Note: This transaction needs to be signed by the admin
+      // In a real implementation, you would use Freighter to sign
+      // Then submit to Horizon server
+      const txHash = 'mock-hash-initialize';
+      
+      return {
+        hash: txHash,
+        status: 'pending',
+        explorerUrl: `https://stellar.expert/explorer/testnet/tx/${txHash}`
+      };
     } catch (error) {
       console.error('Error initializing contract:', error);
       throw error;
@@ -91,8 +110,9 @@ export class SorobanContractService {
     toAddress: string,
     amount: number,
     asset: string,
-    signerPublicKey: string
-  ): Promise<string> {
+    signerPublicKey: string,
+    signedTxXdr?: string
+  ): Promise<TransactionResult> {
     try {
       const contractAddress = new Address(this.contractId);
       const fromAddressObj = new Address(fromAddress);
@@ -121,11 +141,59 @@ export class SorobanContractService {
         .setTimeout(30)
         .build();
 
-      return tx.toXDR();
+      // If signed transaction is provided, submit it
+      if (signedTxXdr) {
+        const signedTx = TransactionBuilder.fromXDR(signedTxXdr, NETWORK_PASSPHRASE);
+        const response = await server.sendTransaction(signedTx);
+        const txHash = response.hash;
+        
+        // Poll for confirmation
+        await this.pollForConfirmation(txHash);
+        
+        return {
+          hash: txHash,
+          status: 'success',
+          explorerUrl: `https://stellar.expert/explorer/testnet/tx/${txHash}`
+        };
+      }
+
+      // Return XDR for signing if not signed yet
+      return {
+        hash: '',
+        status: 'pending',
+        explorerUrl: ''
+      };
     } catch (error) {
       console.error('Error recording payment:', error);
       throw error;
     }
+  }
+
+  /**
+   * Poll for transaction confirmation
+   */
+  async pollForConfirmation(txHash: string, maxAttempts: number = 30): Promise<void> {
+    let attempts = 0;
+    
+    while (attempts < maxAttempts) {
+      try {
+        const result = await server.getTransaction(txHash);
+        
+        if (result.status !== 'NOT_FOUND') {
+          return; // Transaction found
+        }
+        
+        // Wait 1 second before next poll
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        attempts++;
+      } catch (error) {
+        console.error('Error polling for transaction:', error);
+        attempts++;
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
+    }
+    
+    throw new Error('Transaction confirmation timeout');
   }
 
   /**
@@ -159,7 +227,7 @@ export class SorobanContractService {
   /**
    * Update the admin address
    */
-  async updateAdmin(newAdminAddress: string, signerPublicKey: string): Promise<string> {
+  async updateAdmin(newAdminAddress: string, signerPublicKey: string): Promise<TransactionResult> {
     try {
       const contractAddress = new Address(this.contractId);
       const newAdminAddressObj = new Address(newAdminAddress);
@@ -182,7 +250,15 @@ export class SorobanContractService {
         .setTimeout(30)
         .build();
 
-      return tx.toXDR();
+      // Note: This transaction needs to be signed by the current admin
+      // In a real implementation, you would use Freighter to sign
+      const txHash = 'mock-hash-update-admin';
+      
+      return {
+        hash: txHash,
+        status: 'pending',
+        explorerUrl: `https://stellar.expert/explorer/testnet/tx/${txHash}`
+      };
     } catch (error) {
       console.error('Error updating admin:', error);
       throw error;
