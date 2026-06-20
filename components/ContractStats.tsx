@@ -1,15 +1,19 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { contractService, TransactionResult } from '@/lib/contract';
+import { recordPayment, getTransactionCount } from '@/lib/contract';
 import { Card } from './example-components';
 
 export default function ContractStats() {
   const [transactionCount, setTransactionCount] = useState<number>(0);
-  const [contractInfo, setContractInfo] = useState<{ admin: string | null; count: number }>({ admin: null, count: 0 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [recentTransaction, setRecentTransaction] = useState<TransactionResult | null>(null);
+  const [recentTransaction, setRecentTransaction] = useState<{
+    txHash: string;
+    explorerUrl: string;
+    status: string;
+  } | null>(null);
+  const [recordingPayment, setRecordingPayment] = useState(false);
 
   const fetchContractData = async () => {
     try {
@@ -17,12 +21,8 @@ export default function ContractStats() {
       setError(null);
       
       // Fetch transaction count
-      const count = await contractService.getTransactionCount();
+      const count = await getTransactionCount();
       setTransactionCount(count);
-      
-      // Fetch contract info
-      const info = await contractService.getInfo();
-      setContractInfo(info);
     } catch (err) {
       setError('Failed to fetch contract data');
       console.error('Error fetching contract data:', err);
@@ -33,20 +33,25 @@ export default function ContractStats() {
 
   const handleRecordPayment = async () => {
     try {
+      setRecordingPayment(true);
+      setError(null);
+      
       // This is a demo - in a real implementation, you would get these values from a form
-      const result = await contractService.recordPayment(
-        'GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+      const result = await recordPayment(
         'GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
         100,
-        'XLM',
-        'GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+        'XLM'
       );
       
-      if (result.hash) {
-        setRecentTransaction(result);
-      }
+      setRecentTransaction(result);
+      
+      // Refresh transaction count after recording
+      await fetchContractData();
     } catch (err) {
+      setError('Failed to record payment');
       console.error('Error recording payment:', err);
+    } finally {
+      setRecordingPayment(false);
     }
   };
 
@@ -70,22 +75,15 @@ export default function ContractStats() {
             <p className="text-white/60 text-sm mb-1">Total Transactions</p>
             <p className="text-3xl font-bold text-stellar-gold">{transactionCount}</p>
           </div>
-          
-          <div className="bg-stellar-surface rounded-lg p-4 border border-stellar-blue/20">
-            <p className="text-white/60 text-sm mb-1">Contract Admin</p>
-            <p className="text-sm text-white font-mono break-all">
-              {contractInfo.admin || 'Not set'}
-            </p>
-          </div>
 
-          {recentTransaction && recentTransaction.hash && (
+          {recentTransaction && recentTransaction.txHash && (
             <div className="bg-stellar-surface rounded-lg p-4 border border-stellar-gold/30">
               <p className="text-white/60 text-sm mb-1">Recent Transaction</p>
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <span className="text-white/60 text-xs">Status:</span>
-                  <span className={`text-xs font-bold ${recentTransaction.status === 'success' ? 'text-green-400' : 'text-yellow-400'}`}>
-                    {recentTransaction.status.toUpperCase()}
+                  <span className={`text-xs font-bold ${recentTransaction.status === 'SUCCESS' ? 'text-green-400' : 'text-yellow-400'}`}>
+                    {recentTransaction.status}
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -96,7 +94,7 @@ export default function ContractStats() {
                     rel="noopener noreferrer"
                     className="text-xs text-stellar-gold hover:text-stellar-gold-light font-mono break-all"
                   >
-                    {recentTransaction.hash}
+                    View on Stellar Expert: {recentTransaction.txHash}
                   </a>
                 </div>
               </div>
@@ -112,9 +110,10 @@ export default function ContractStats() {
             </button>
             <button
               onClick={handleRecordPayment}
-              className="flex-1 bg-stellar-gold hover:bg-stellar-gold-light text-white font-bold py-2 rounded-lg transition-colors"
+              disabled={recordingPayment}
+              className="flex-1 bg-stellar-gold hover:bg-stellar-gold-light text-white font-bold py-2 rounded-lg transition-colors disabled:opacity-50"
             >
-              Test Payment
+              {recordingPayment ? 'Recording...' : 'Test Payment'}
             </button>
           </div>
         </div>

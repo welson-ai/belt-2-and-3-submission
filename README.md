@@ -140,37 +140,46 @@ The frontend is integrated with a deployed Soroban smart contract on Stellar tes
 **Integration Architecture:**
 
 1. **Contract Service (`lib/contract.ts`)**:
-   - Uses Stellar SDK for Soroban contract interaction
-   - Provides methods to call all contract functions
-   - Handles transaction building and signing preparation
-   - Uses Freighter wallet for transaction signing
+   - Uses Stellar SDK with Soroban RPC for contract interaction
+   - Uses Freighter API for wallet connection and transaction signing
+   - Provides `recordPayment()` function for recording transactions
+   - Provides `getTransactionCount()` function for reading contract state
+   - Automatically captures transaction hash from contract invocations
+   - Implements transaction confirmation polling
+   - Returns explorer URLs for transaction viewing
 
 2. **Contract Functions Available:**
-   - `initialize(admin: Address)` - Initialize contract with admin
-   - `get_admin()` - Get the contract admin address
    - `record_payment(from, to, amount, asset)` - Record payment transaction
-   - `get_transaction(sequence)` - Get transaction by sequence number
    - `get_transaction_count()` - Get total transaction count
-   - `get_info()` - Get contract info (admin and count)
-   - `update_admin(new_admin)` - Update contract admin
+   - Other contract functions available but not yet integrated in UI
 
 3. **UI Integration (`components/ContractStats.tsx`)**:
    - Displays contract transaction count
-   - Shows contract admin address
+   - Shows recent transaction with hash and status
+   - Displays transaction hash as clickable link to Stellar Expert
    - Provides refresh functionality
    - Integrated into main dashboard when wallet is connected
 
-4. **Connection Flow:**
-   - User connects wallet via Stellar Wallets Kit
-   - Contract service uses Stellar SDK to build transactions
-   - Transactions are signed by Freighter wallet
-   - Signed transactions are submitted to Stellar network
-   - Contract state is read via RPC calls
+4. **Transaction Flow:**
+   - User connects wallet via Freighter API
+   - Contract service builds transaction using Stellar SDK
+   - Transaction is simulated via Soroban RPC
+   - Transaction is signed by Freighter wallet
+   - Signed transaction is submitted to Soroban network
+   - Transaction hash is captured from response
+   - System polls for transaction confirmation
+   - Transaction hash is displayed as explorer link
 
-5. **Dependencies:**
+5. **Transaction Hash Display:**
+   - Hash is automatically returned when contract is invoked
+   - Displayed as clickable link: `https://stellar.expert/explorer/testnet/tx/{txHash}`
+   - Status is shown (SUCCESS, PENDING, FAILED)
+   - Confirmation polling ensures transaction is confirmed
+
+6. **Dependencies:**
    - `@stellar/stellar-sdk` - Core Stellar SDK for blockchain interaction
-   - `soroban-client` - Soroban contract interaction (deprecated, using Stellar SDK instead)
    - `@stellar/freighter-api` - Freighter wallet integration
+   - Soroban RPC server for contract interaction
 
 **Transaction Hash for Contract Interaction:**
 4dc65ecf9334d86c0127be3e9c512b0143b837d02877f0db99ad735a3e358200
